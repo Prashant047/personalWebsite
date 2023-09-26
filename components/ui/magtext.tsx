@@ -9,6 +9,7 @@ export default function MagText({
 
   const handleMouseMove = (event: React.MouseEvent<HTMLSpanElement>) => {
 
+    // @ts-ignore
     const containerSpan = event.target.parentElement as HTMLSpanElement;
     const boundingRect = containerSpan.getBoundingClientRect();
     let localX = event.clientX - boundingRect.x;
@@ -20,6 +21,7 @@ export default function MagText({
       let diff = Math.abs(localX-childX);
       let weight = Math.max(300, 800*(1-(diff/100)));
 
+      // @ts-ignore
       containerSpan.children[i].style.fontWeight = `${weight}`;
     }
 
