@@ -17,7 +17,7 @@ export default function Home() {
           other developers, you will probably find me in Reactiflux or the Next.js Discord
         </p>
       </section>
-      <section className="mt-10">
+      <section className="my-10">
         {/* <h1 className="text-3xl">Experiments</h1> */}
         <MagText text="Experiments" className="text-3xl"/>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-5 mb-1">
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
         <div className="flex justify-end">
           <Link 
-            className="group inline-flex items-center leading-none gap-1 text-xs text-neutral-500 hover:text-neutral-300 transition" 
+            className="group inline-flex items-center leading-none gap-1 text-xs text-neutral-500 hover:text-neutral-300 hover:underline" 
             href="/experiments"
           >
             more experiments <i><ArrowRight className="group-hover:translate-x-1 transition" size={10}/></i>

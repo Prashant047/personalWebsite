@@ -1,7 +1,10 @@
-import { AlignLeft, ArrowRight, Github } from "lucide-react"
+"use client"
+
+import { AlignLeft, ArrowRight, GitBranch, ScreenShare } from "lucide-react"
 import { TagFramerMotion, TagNext, TagReact, TagTailWind } from "./tag"
 import { cn } from "@/lib/utils"
-import * as React from "react"
+import React, { useState } from "react"
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./card";
 import { TagType } from "./tag";
 
@@ -12,34 +15,33 @@ const tagMapping = {
   'framermotion': <TagFramerMotion/>,
 }
  
-export interface ExperimentCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ExperimentCardProps {
   title: string,
   description: string,
-  href: string
-  tags: Array<TagType>
+  href: string,
+  tags: Array<TagType>,
+  className?: string
 }
  
-const ExperimentCard = React.forwardRef<
-  HTMLDivElement,
-  ExperimentCardProps
->(({ className, href, title, description, tags ,...props }, ref) => (
-    <Card ref={ref} className={cn("group hover:bg-neutral-800/50 border-neutral-800", className)} {...props} >
+const ExperimentCard = ({ className, href, title, description, tags }: ExperimentCardProps) => {
+
+  const [active, setActive] = useState(false);
+
+  return (
+    <Card 
+      className={cn(`relative group hover:bg-neutral-800/50 border-neutral-800 ${active?'pointer-event-none':'cursor-pointer'} `, className)} 
+      onClick={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+    >
       <CardHeader className="flex items-center gap-2">
         <i>
           <AlignLeft className="text-neutral-400 text-blue-700" size={15}/>
         </i>
-        <a href={href} className="hover:underline">
-          <CardTitle>
-            {title}
-          </CardTitle>
-        </a>
+        <CardTitle>
+          {title}
+        </CardTitle>
         <i>
           <ArrowRight className="text-neutral-400 group-hover:translate-x-3 group-hover:text-neutral-300 transition" size={15}/>
-        </i>
-        <i className="ml-auto h-6 w-6 text-neutral-400 rounded-full bg-neutral-800/50 hover:bg-neutral-800 hover:text-neutral-200 flex items-center justify-center">
-          <a href="https://github.com/Prashant047">
-            <Github className="transition" size={13}/>
-          </a>
         </i>
       </CardHeader>
       <CardContent className="pt-2">
@@ -48,10 +50,61 @@ const ExperimentCard = React.forwardRef<
         </p>
       </CardContent>
       <CardFooter className="flex items-center gap-2">
-        {tags.map((tag:TagType) => tagMapping[tag] )}
+        {tags.map((tag:TagType, i) => <React.Fragment key={i}>{tagMapping[tag]}</React.Fragment> )}
       </CardFooter>
+      <AnimatePresence>
+        {active && (
+          <motion.div 
+            className="absolute inset-0 bg-neutral-900/70 rounded-md flex items-center justify-center gap-8"
+            initial={{backdropFilter: 'blur(0px)', opacity:1}}
+            animate={{backdropFilter: 'blur(12px)', opacity:1}}
+            exit={{backdropFilter: 'blur(0px)', opacity:0}}
+          >
+            <BackDropButton 
+              icon={<GitBranch size={20}/>}
+              href={"https://github.com/Prashant047"}
+              side="left"
+            >
+              repo
+            </BackDropButton>
+            <BackDropButton 
+              icon={<ScreenShare size={20}/>}
+              href={"#"}
+              side="right"
+            >
+              live demo
+            </BackDropButton>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Card>
-))
+  )
+}
 ExperimentCard.displayName = "ExperimentCard"
+
+function BackDropButton({
+  children, icon, href, side
+}:{
+  children:React.ReactNode, 
+  icon:React.ReactNode,
+  href:string,
+  side: 'left' | 'right'
+}) {
+  return (
+    <motion.div 
+      className="flex flex-col items-center"
+      initial={{opacity:0, x:10*(side === 'left'?-1:1)}}
+      animate={{opacity:1, x:0}}
+    >
+      <a href={href} target="_blank" className="h-12 w-12 flex items-center text-neutral-300 justify-center bg-neutral-900 rounded-full overflow-hidden">
+        {icon}
+      </a>
+      <small className="text-xs font-light text-neutral-400">
+        {children}
+      </small>
+    </motion.div>
+  )
+}
+
 
 export { ExperimentCard };
