@@ -15,13 +15,11 @@ export default function RootLayout({
   return (
     <html lang="en" className='bg-neutral-900 text-neutral-100'>
       <body>
+        <header className='px-4 max-w-3xl mx-auto'>
+          <MainNav/>
+        </header>
         <main className='px-4 max-w-3xl mx-auto'>
-          <div>
-            <MainNav/>
-          </div>
-          <div>
-            {children}
-          </div>
+          {children}
         </main>
       </body>
     </html>

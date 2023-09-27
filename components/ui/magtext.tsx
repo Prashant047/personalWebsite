@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
+import { cn } from "@/lib/utils";
 
-export default function MagText({
-  text
-}: {
-  text: string
-}){
+export interface MagTextProps extends React.HTMLAttributes<HTMLSpanElement> {
+  text:string
+};
+
+export default function MagText({text, className, ...props}: MagTextProps ){
 
   const handleMouseMove = (event: React.MouseEvent<HTMLSpanElement>) => {
 
@@ -38,7 +39,7 @@ export default function MagText({
 
 
   return (
-    <span onMouseMove={handleMouseMove} className="inline-flex variable-font cursor-default">
+    <span onMouseMove={handleMouseMove} className={cn("inline-flex variable-font cursor-default", className)} {...props}>
       { characters }
     </span>
   )

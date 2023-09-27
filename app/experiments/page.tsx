@@ -1,7 +1,9 @@
 export default function Experiments(){
   return (
-    <div>
+    <section>
       experiments
-    </div>
+    </section>
   )
 }
+
+// loading skeleton
