@@ -1,5 +1,6 @@
 import { MagText } from "@/components/ui/magtext";
 import { ExperimentCard } from '@/components/ui/experimentCard';
+import { Footer } from "@/components/footer";
 import { ArrowRight } from 'lucide-react';
 import Link from "next/link";
 
@@ -60,6 +61,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <Footer/>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { MagText } from '@/components/ui/magtext';
 import { ExperimentCard } from '@/components/ui/experimentCard';
+import { Footer } from '@/components/footer';
 
 export default function Experiments(){
   return (
@@ -15,7 +16,7 @@ export default function Experiments(){
           </div>
         </div>
       </section>
-      <section className='mt-10'>
+      <section className='my-10'>
         <div className='flex flex-col gap-4'>
           <ExperimentCard
             href="#"
@@ -43,6 +44,7 @@ export default function Experiments(){
           />
         </div>
       </section>
+      <Footer/>
     </>
   )
 }
