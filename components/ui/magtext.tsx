@@ -6,7 +6,7 @@ export interface MagTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   text:string
 };
 
-export default function MagText({text, className, ...props}: MagTextProps ){
+function MagText({text, className, ...props}: MagTextProps ){
 
   const handleMouseMove = (event: React.MouseEvent<HTMLSpanElement>) => {
 
@@ -39,8 +39,10 @@ export default function MagText({text, className, ...props}: MagTextProps ){
 
 
   return (
-    <span onMouseMove={handleMouseMove} className={cn("inline-flex variable-font cursor-default", className)} {...props}>
+    <span onMouseMove={handleMouseMove} className={cn("inline-flex variable-font cursor-default font-publicsans", className)} {...props}>
       { characters }
     </span>
   )
 }
+
+export { MagText };

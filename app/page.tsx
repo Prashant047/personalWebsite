@@ -1,4 +1,4 @@
-import MagText from "@/components/ui/magtext";
+import { MagText } from "@/components/ui/magtext";
 import { ExperimentCard } from '@/components/ui/experimentCard';
 import { ArrowRight } from 'lucide-react';
 import Link from "next/link";
@@ -7,11 +7,16 @@ export default function Home() {
   return (
     <>
       <section>
-        <h3 className="text-lg text-neutral-300">Hi There,</h3>
-        <h1 className="text-3xl md:text-5xl">
-          I'm&nbsp;<MagText text="Prashant Kumar"/>
-        </h1>
-        <p className="mt-5 text-neutral-300 md:text-md text-neutral-400">
+        <div className='flex items-center gap-2 font-publicsans'>
+          <span className='text-7xl text-neutral-700 font-bold'>
+            01
+          </span>
+          <div>
+            <h1 className="text-sm font-light tracking-wider">Hi There,</h1>
+            <MagText className="text-4xl" text="I'M PRASHANT"/>
+          </div>
+        </div>
+        <p className="mt-5 text-neutral-300 md:text-md text-neutral-400 border-y border-neutral-800 py-6">
           I'm a Software Engineer building full-stack web applications with React, Node.js, 
           TypeScript, and PostgreSQL. I like to hang out in Discord communities to help 
           other developers, you will probably find me in Reactiflux or the Next.js Discord
@@ -58,3 +63,5 @@ export default function Home() {
     </>
   );
 }
+
+// TODO: Make the border of experiment card blue when in active state

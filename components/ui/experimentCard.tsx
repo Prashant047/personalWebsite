@@ -35,7 +35,7 @@ const ExperimentCard = ({ className, href, title, description, tags }: Experimen
     >
       <CardHeader className="flex items-center gap-2">
         <i>
-          <AlignLeft className="text-neutral-400 text-blue-700" size={15}/>
+          <AlignLeft className=" text-blue-700" size={15}/>
         </i>
         <CardTitle>
           {title}
@@ -69,7 +69,7 @@ const ExperimentCard = ({ className, href, title, description, tags }: Experimen
             </BackDropButton>
             <BackDropButton 
               icon={<ScreenShare size={20}/>}
-              href={"#"}
+              href={href}
               side="right"
             >
               live demo
@@ -92,14 +92,15 @@ function BackDropButton({
 }) {
   return (
     <motion.div 
-      className="flex flex-col items-center"
+      className="flex flex-col items-center group text-neutral-400 hover:text-neutral-200"
       initial={{opacity:0, x:10*(side === 'left'?-1:1)}}
       animate={{opacity:1, x:0}}
+      whileHover={{scale:1.1}}
     >
-      <a href={href} target="_blank" className="h-12 w-12 flex items-center text-neutral-300 justify-center bg-neutral-900 rounded-full overflow-hidden">
+      <a href={href} target="_blank" className="h-12 w-12 flex items-center justify-center bg-neutral-900 rounded-full overflow-hidden">
         {icon}
       </a>
-      <small className="text-xs font-light text-neutral-400">
+      <small className="text-xs font-light">
         {children}
       </small>
     </motion.div>

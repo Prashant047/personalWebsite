@@ -17,7 +17,7 @@ function NavLinks({
   return (
       <Link 
         href={href} 
-        className="flex items-center justify-center px-2 py-1 relative text-neutral-500 data-[active=true]:text-neutral-300 transition hover:text-neutral-400"
+        className="flex items-baseline justify-center gap-1 px-3 py-1 relative text-neutral-500 data-[active=true]:text-neutral-300 transition hover:text-neutral-400"
         data-active={active}
       >
         {active && (
