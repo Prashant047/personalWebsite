@@ -1,48 +1,72 @@
-import { MagText } from '@/components/ui/magtext';
+"use client";
 import { ExperimentCard } from '@/components/ui/experimentCard';
 import { Footer } from '@/components/footer';
+import { ExperimentsHeading } from './experiments-heading';
+import { motion, Variants } from 'framer-motion';
+
+const cardSectionVariant: Variants  = {
+  hidden:{
+    opacity:1,
+  },
+  visible:{
+    opacity:1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const expVariant = {
+  hidden:{opacity:0, x:-10},
+  visible:{opacity:1, x: 0}
+};
 
 export default function Experiments(){
   return (
     <>
       <section>
-        <div className='flex items-center gap-2 font-publicsans'>
-          <span className='text-7xl text-neutral-700 font-bold'>
-            02
-          </span>
-          <div>
-            <h1 className="text-sm font-light tracking-wider">Table of </h1>
-            <MagText className="text-4xl" text="EXPERIMENTS"/>
-          </div>
-        </div>
+        <ExperimentsHeading/>
       </section>
       <section className='my-10'>
-        <div className='flex flex-col gap-4'>
-          <ExperimentCard
-            href="#"
-            title="Example Title Here"
-            description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
-            tags={["react", "tailwind"]}
-          />
-          <ExperimentCard
-            href="#"
-            title="Example Title Here"
-            description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
-            tags={["react"]}
-          />
-          <ExperimentCard
-            href="#"
-            title="Example Title Here"
-            description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
-            tags={["react", "tailwind", "next"]}
-          />
-          <ExperimentCard
-            href="#"
-            title="Example Title Here"
-            description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
-            tags={["tailwind"]}
-          />
-        </div>
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={cardSectionVariant}
+          className='flex flex-col gap-4'
+        >
+          <motion.article variants={expVariant}>
+            <ExperimentCard
+              href="#"
+              title="Example Title Here"
+              description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
+              tags={["react", "tailwind"]}
+            />
+          </motion.article>
+          <motion.article variants={expVariant}>
+            <ExperimentCard
+              href="#"
+              title="Example Title Here"
+              description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
+              tags={["react", "tailwind"]}
+            />
+          </motion.article>
+          <motion.article variants={expVariant}>
+            <ExperimentCard
+              href="#"
+              title="Example Title Here"
+              description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
+              tags={["react", "tailwind"]}
+            />
+          </motion.article>
+          <motion.article variants={expVariant}>
+            <ExperimentCard
+              href="#"
+              title="Example Title Here"
+              description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt veniam, accusantium explicabo consequatur "
+              tags={["react", "tailwind"]}
+            />
+          </motion.article>
+        </motion.div>
       </section>
       <Footer/>
     </>
