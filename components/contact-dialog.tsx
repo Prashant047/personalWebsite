@@ -1,8 +1,9 @@
 "use client";
 import * as Dialog from '@radix-ui/react-dialog';
-import { X, MoveRight } from 'lucide-react';
+import { X, MoveRight, CircleDashed, Check } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/text-area';
+import { useState } from 'react';
 
 function ContactDialog(){
   return (
@@ -45,29 +46,97 @@ function ContactDialog(){
   );
 }
 
+async function sendMail({message, email, name}: {message:string, email:string, name: string}){
+  const response = await fetch("/api/sentMail", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({message, email, name}),
+  });
+  return response.json();
+}
+
 function ContactForm(){
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (event:any) => {
+    event.preventDefault();
+    if(name.length === 0) {
+      setError('No Name provided');
+      return;
+    }
+    if(email.length === 0) {
+      setError('No Email provided');
+      return;
+    }
+    if(message.length === 0) {
+      setError('Message is Empty');
+      return;
+    }
+
+    setLoading(true);
+    setSuccess(false);
+    try{
+      const res = await sendMail({name, email, message});
+      setSuccess(true);
+      setError('');
+      console.log(res);
+    }
+    catch (error) {
+      console.log(error);
+      setError('Failed to Sent message, please try the direct mail link below');
+    }
+    setLoading(false);
+
+  }
+
   return (
-    <form action="" className='flex flex-col gap-2'>
+    <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+      {error !== '' && (
+        <div className='text-center text-xs text-red-400'>
+          <span>{error}</span>
+        </div>
+      )}
       <fieldset>
         <label htmlFor="name" className='text-neutral-400 text-sm'>
           Name
         </label>
-        <Input type='text' id='name'/>
+        <Input type='text' name="name" value={name} onChange={(e) => setName(e.target.value)} />
       </fieldset>
       <fieldset>
         <label htmlFor="email" className='text-neutral-400 text-sm'>
           Email
         </label>
-        <Input type='email' id='email'/>
+        <Input type='email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
       </fieldset>
       <fieldset>
         <label htmlFor="message" className='text-neutral-400 text-sm'>
           Message
         </label>
-        <Textarea id='message' className='h-24'/>
+        <Textarea name='message' className='h-24' value={message} onChange={(e) => setMessage(e.target.value)} />
       </fieldset>
-      <button className='bg-neutral-300 text-neutral-950 rounded-md py-2 font-semibold'>
-        Send
+      <button 
+        disabled={loading} 
+        className={`${success?'bg-green-500':'bg-neutral-300'} text-neutral-950 flex items-center justify-center gap-2 rounded-md py-2 font-semibold disabled:opacity-80`}
+      >
+        {loading ? (
+          <>
+            <CircleDashed className='animate-spin'/>
+            <span>Sending Message...</span>
+          </>
+        ) : success ? (
+          <>
+            <Check/>
+            <span>Sent!</span>
+          </>
+        ):'Send'}
       </button>
     </form>
   )

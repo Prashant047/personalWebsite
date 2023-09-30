@@ -89,4 +89,3 @@ export default function Home() {
   );
 }
 
-// TODO: Make the border of experiment card blue when in active state
