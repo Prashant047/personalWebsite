@@ -47,7 +47,7 @@ function ContactDialog(){
 }
 
 async function sendMail({message, email, name}: {message:string, email:string, name: string}){
-  const response = await fetch("/api/sentMail", {
+  const response = await fetch("/api/sendMail", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
