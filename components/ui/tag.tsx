@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils"
 
-export type TagType = 'react' | 'tailwind' | 'next' | 'framermotion';
-
 export interface TagProps
   extends React.HTMLAttributes<HTMLDivElement> {}
  

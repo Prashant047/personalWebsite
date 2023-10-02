@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils"
 import React, { useState } from "react"
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./card";
-import { TagType } from "./tag";
 
 const tagMapping = {
   'react': <TagReact/>,
@@ -18,13 +17,14 @@ const tagMapping = {
 export interface ExperimentCardProps {
   title: string,
   description: string,
-  href: string,
-  tags: Array<TagType>,
+  live_url: string,
+  repository_url: string
+  tags: Array<string>,
   className?: string
 }
  
  
-const ExperimentCard = ({ className, href, title, description, tags }: ExperimentCardProps) => {
+const ExperimentCard = ({ className, live_url, repository_url, title, description, tags }: ExperimentCardProps) => {
 
   const [active, setActive] = useState(false);
 
@@ -51,7 +51,8 @@ const ExperimentCard = ({ className, href, title, description, tags }: Experimen
           </p>
         </CardContent>
         <CardFooter className="flex items-center gap-2">
-          {tags.map((tag:TagType, i) => <React.Fragment key={i}>{tagMapping[tag]}</React.Fragment> )}
+        {/* @ts-ignore */}
+          {tags.map((tag, i) => <React.Fragment key={i}>{tagMapping[tag]}</React.Fragment> )}
         </CardFooter>
         <AnimatePresence>
           {active && (
@@ -63,14 +64,14 @@ const ExperimentCard = ({ className, href, title, description, tags }: Experimen
             >
               <BackDropButton 
                 icon={<GitBranch size={20}/>}
-                href={"https://github.com/Prashant047"}
+                href={repository_url}
                 side="left"
               >
                 repo
               </BackDropButton>
               <BackDropButton 
                 icon={<ScreenShare size={20}/>}
-                href={href}
+                href={live_url}
                 side="right"
               >
                 live demo

@@ -1,12 +1,15 @@
 "use client";
 import React from "react";
+import { motion } from 'framer-motion';
 import { cn } from "@/lib/utils";
 
-export interface MagTextProps extends React.HTMLAttributes<HTMLSpanElement> {
-  text:string
+export interface MagTextProps {
+  text: string,
+  className: string,
+  fadeIn?: boolean
 };
 
-function MagText({text, className, ...props}: MagTextProps ){
+function MagText({text, className, fadeIn=false}: MagTextProps ){
 
   const handleMouseMove = (event: React.MouseEvent<HTMLSpanElement>) => {
 
@@ -39,9 +42,9 @@ function MagText({text, className, ...props}: MagTextProps ){
 
 
   return (
-    <span onMouseMove={handleMouseMove} className={cn("inline-flex variable-font cursor-default font-publicsans", className)} {...props}>
+    <motion.span initial={{opacity: fadeIn ? 0: 1}} animate={{opacity:1}} onMouseMove={handleMouseMove} className={cn("inline-flex variable-font cursor-default font-publicsans", className)}>
       { characters }
-    </span>
+    </motion.span>
   )
 }
 
