@@ -84,10 +84,9 @@ function ContactForm(){
     setLoading(true);
     setSuccess(false);
     try{
-      const res = await sendMail({name, email, message});
+      await sendMail({name, email, message});
       setSuccess(true);
       setError('');
-      console.log(res);
     }
     catch (error) {
       console.log(error);
