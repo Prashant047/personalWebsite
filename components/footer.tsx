@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin, ExternalLink } from 'lucide-react';
+import { Github, Twitter, Linkedin, ExternalLink, MapPin } from 'lucide-react';
 import React from 'react';
 import { ContactDialog } from '@/components/contact-dialog';
 
@@ -12,8 +12,8 @@ function Footer(){
           </a>
         </small>
         <ContactDialog/>
-        <small className='text-neutral-400 '>
-          Dublin, IE
+        <small className='text-neutral-400 flex items-center gap-1'>
+          <MapPin size={10}/> Dublin, IE 
         </small>
       </div>
       <div className=' flex justify-between items-center'>
