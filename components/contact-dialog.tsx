@@ -9,7 +9,7 @@ function ContactDialog(){
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className='text-xs text-neutral-400'>
+        <button className='text-xs text-neutral-400 underline hover:text-neutral-200 transition'>
           contact me
         </button>
       </Dialog.Trigger>
