@@ -2,10 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { CourierClient } from "@trycourier/courier";
 
 
-const courier = CourierClient(
-  { authorizationToken: "pk_prod_AM71560AKT4W06P770A37EDA910T"});
-
-
 async function sendMail({message, email, name}:{ message: string, email:string, name:string}) {
   const courier = CourierClient({authorizationToken: process.env.COURIER_TOKEN});
 

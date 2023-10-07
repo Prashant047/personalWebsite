@@ -2,7 +2,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { MainNav } from '@/components/main-nav';
 import localFont from 'next/font/local'
-import { BackgroundGraphic } from '@/components/graphic';
  
 const publicSans = localFont({
   src: './PublicSans.woff2',
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-neutral-900 text-neutral-100 ${publicSans.variable}`}>
       <body>
-        <BackgroundGraphic/>
         <header className='px-4 max-w-3xl mx-auto'>
           <MainNav/>
         </header>
