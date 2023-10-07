@@ -4,7 +4,7 @@ import { ContactDialog } from '@/components/contact-dialog';
 
 function Footer(){
   return (
-    <footer className="py-5 border-t border-neutral-800">
+    <footer className="relative py-5 border-t border-neutral-800 z-10">
       <div className=' flex justify-between items-center mb-3'>
         <small className='text-neutral-400 '>
           <a href="/RESUME_.pdf" target='_blank' className='flex items-center gap-1 hover:underline'>

@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useEffect, useState } from 'react';
-import { motion, motionValue, animate, useAnimate, useSpring, useMotionValue, useTransform, useTime } from 'framer-motion';
+import { motion, useSpring, useTransform } from 'framer-motion';
+import { useLocalMouse } from '@/lib/hooks';
 
 class Grid {
   width = 0;
@@ -39,8 +40,7 @@ class Grid {
   }
 }
 
-const grid = new Grid(100, 500, 30, 6);
-console.log(grid.getGrid());
+let grid = new Grid(1319, 766, 15, 15);
 
 const delay = (ms:number) => new Promise((resolve) => {
   setTimeout(() => {
@@ -57,45 +57,52 @@ const getLineCoord = (length:number, angle:number, px:number, py:number) => ({
   y2: py - (length/2)*Math.sin(degToRadian(angle)),
 });
 
-function GraphicRight() {
-
+function BackgroundGraphic() {
+  const containerRef = useRef(null);
+  const [mouseX, mouseY] = useLocalMouse(containerRef);
   const [angle, setAngle] = useState(45);
-  // useEffect(() => {
-  //   const id = setInterval(() => {
-  //     setAngle(prev => prev + 1);
-  //   },100)
-  //   return () => clearInterval(id);
-  // })
   
-  const [scope, animate] = useAnimate();
-
   useEffect(() => {
-    animate("line", { transform: 'rotate(45)'}, {duration: 0.5})
-  });
+    if ( containerRef.current === null) {
+      return ;
+    }
+
+    const container = containerRef.current as HTMLElement;
+    const handler = () => {
+      const height = container.getBoundingClientRect().height;
+      const width = container.getBoundingClientRect().width;
+      container.setAttribute('viewBox', `0 0 ${width} ${height}`)
+      grid = new Grid(width, height , 15, 15);
+    }
+
+    window.addEventListener('resize', handler);
+
+    return () => window.removeEventListener('resize', handler);
+  },[]);
+  
 
   return (
-    <div className="fixed top-10 right-10 h-screen">
+    <div className="fixed inset-0 pointer-none">
       <svg 
-        onClick={() => setAngle(prev => prev + 30)}
-        ref={scope}
-        viewBox='0 0 100 500'
+        viewBox='0 0 1319 766'
+        onClick={() => setAngle( prev => prev + 60)}
+        ref={containerRef}
         style={{
-          width: '100px',
-          height: '500px',
+          opacity: 0.2
         }}
-        // className='border border-neutral-800'
+        className='w-full mx-auto h-screen'
       >
         {grid.getGrid().map(({xCoord, yCoord}, i) => (
           <Line
             centerX={xCoord}
             centerY={yCoord}
+            mouseX={mouseX}
+            mouseY={mouseY}
             angle={angle}
-            length={15}
+            length={10}
             key={i}
-            index={i}
           />
         ))}
-        {/* <line x1="0" y1="80" x2="100" y2="20" stroke="red" /> */}
       </svg>
     </div>
   );
@@ -106,48 +113,57 @@ interface LineProps {
   centerY: number,
   angle: number,
   length: number,
-  index: number
+  mouseX: number,
+  mouseY: number
+  index?: number,
 }
 
-function Line({centerX, centerY, angle, length, index}: LineProps){
-  // const motionAngle = useSpring(0);
-  const time = useTime()
-  const motionAngle = useTransform(time, [0, 7000], [0, 360 + index*5], {clamp: false});
-  
+function Line({
+  centerX, 
+  centerY, 
+  angle, 
+  length, 
+  mouseX,
+  mouseY
+}: LineProps){
+  const motionAngle = useSpring(0);
 
   const x1 = useTransform(motionAngle, latest => getLineCoord(length, latest, centerX, centerY).x1);
   const y1 = useTransform(motionAngle, latest => getLineCoord(length, latest, centerX, centerY).y1);
   const x2 = useTransform(motionAngle, latest => getLineCoord(length, latest, centerX, centerY).x2);
   const y2 = useTransform(motionAngle, latest => getLineCoord(length, latest, centerX, centerY).y2);
-  // const color = useTransform(motionAngle, [0, 360 + index*5], ["#f00", "#00f"], {clamp: false});
 
+  useEffect(() => {
+    async function stuff(){
+      let yDiff = mouseY-centerY;
+      let xDiff = mouseX-centerX;
+      let angleToMouse = (Math.atan2(yDiff, xDiff)*180)/Math.PI;
 
-  // useEffect(() => {
-  //   async function stuff(){
-  //     await delay(index*10);
-  //     motionAngle.set(angle);
-  //   }
-  //   stuff();
-  // },[angle]);
+      motionAngle.set(angleToMouse);
+    }
+    stuff();
+  },[mouseX, mouseY]);
 
-  // const lineCoord = getLineCoord(length, angle, centerX, centerY);
+  useEffect(() => {
+    async function stuff(){
+      let dist = Math.sqrt(Math.pow((mouseX-centerX),2) + Math.pow((mouseY-centerY),2));
+
+      await delay(dist*1);
+      motionAngle.set(angle);
+    }
+    stuff();
+  },[angle]);
+
   return (
     <motion.line 
-      // {...lineCoord} 
-      // transform={`rotate(${0})`}  
       x1={x1}
       y1={y1}
       x2={x2}
       y2={y2}
-      
-      // style={{
-      //   transformBox: 'fill-box',
-      //   transformOrigin: 'center',
-      // }}
       stroke="#333"
       strokeWidth={2}
     />
   )
 }
 
-export { GraphicRight };
+export { BackgroundGraphic };
