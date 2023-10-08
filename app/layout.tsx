@@ -9,10 +9,28 @@ const publicSans = localFont({
   variable: '--font-public-sans'
 });
 
+const description =  `I'm a Software Engineer building full-stack web applications withReact Node.js TypeScript PostgresSQL Next.js. I like designing and building user interfaces as well as experimenting with new technologies.`;
+const title = 'Prashant Kumar';
+const url = 'https://www.prashantkumar.space';
+
 export const metadata: Metadata = {
-  title: 'Prashant Kumar',
-  description: 'My Website',
-};
+  title,
+  description,
+  applicationName: 'Prashant Kumar',
+  referrer: 'origin-when-cross-origin',
+  keywords: ['Next.js', 'React', 'JavaScript', 'TypeScript', 'Framermotion', 'Tailwind', 'Full Stack', 'Software Engineer'],
+  colorScheme: 'dark',
+  creator: 'Prashant Kumar',
+  publisher: 'Prashant Kumar',
+  openGraph: {
+    title,
+    description,
+    url,
+    siteName: title,
+    locale: 'en_US',
+    type: 'website',
+  },
+}
 
 export default function RootLayout({
   children,

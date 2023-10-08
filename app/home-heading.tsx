@@ -33,8 +33,9 @@ function HomeHeading(){
       </div>
     </div>
     <motion.p initial={{opacity:0}} animate={{opacity:1}} className="mt-5 text-neutral-300 md:text-md text-neutral-400 border-y border-neutral-800 py-6">
-      I'm a Software Engineer building full-stack web applications with <Badge>React</Badge> <Badge>Node.js</Badge> <Badge>TypeScript</Badge> <Badge>PostgresSQL</Badge>. I like to hang out in Discord communities to help 
-      other developers, you will probably find me in Reactiflux or the Next.js Discord
+      I'm a <span className="gradient-text-2">Software Engineer</span> building  <span className="gradient-text-1">full-stack web applications</span> with 
+      <Badge>React</Badge> <Badge>Node.js</Badge> <Badge>TypeScript</Badge> <Badge>PostgresSQL</Badge> <Badge>Next.js</Badge>. I like designing and building 
+      user interfaces as well as experimenting with new technologies.
     </motion.p>
   </section>
   );
