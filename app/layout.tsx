@@ -9,7 +9,7 @@ const publicSans = localFont({
   variable: '--font-public-sans'
 });
 
-const description =  `I'm a Software Engineer building full-stack web applications withReact Node.js TypeScript PostgresSQL Next.js. I like designing and building user interfaces as well as experimenting with new technologies.`;
+const description =  `I'm a Software Engineer building full-stack web applications with React Node.js TypeScript PostgresSQL Next.js. I like designing and building user interfaces as well as experimenting with new technologies.`;
 const title = 'Prashant Kumar';
 const url = 'https://www.prashantkumar.space';
 
