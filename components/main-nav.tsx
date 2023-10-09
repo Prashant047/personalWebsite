@@ -1,7 +1,6 @@
 import React  from "react";
 import Image from 'next/image';
 import { NavLinks } from '@/components/ui/navlink';
-import { ContactDialog } from '@/components/contact-dialog';
 
 function MainNav(){
   return (

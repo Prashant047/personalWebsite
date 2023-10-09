@@ -26,7 +26,7 @@ function ExperimentsList({experiments}: {experiments: ExperimentDataType[]}){
       initial="hidden"
       animate="visible"
       variants={cardSectionVariant}
-      className='flex flex-col gap-4'
+      className='grid grid-cols-1 sm:grid-cols-2 gap-6'
     >
       {experiments.map(({
         id,

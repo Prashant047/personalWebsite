@@ -1,11 +1,13 @@
 "use client"
 
-import { AlignLeft, ArrowRight, GitBranch, ScreenShare } from "lucide-react"
-import { TagFramerMotion, TagNext, TagReact, TagTailWind } from "./tag"
-import { cn } from "@/lib/utils"
 import React, { useState } from "react"
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./card";
+import { AlignLeft, ArrowRight, GitBranch, ScreenShare } from "lucide-react"
+import { TagFramerMotion, TagNext, TagReact, TagTailWind } from "./tag"
+import Image from 'next/image';
+import { cn } from "@/lib/utils"
+
 
 const tagMapping = {
   'react': <TagReact/>,
@@ -27,13 +29,24 @@ export interface ExperimentCardProps {
 const ExperimentCard = ({ className, live_url, repository_url, title, description, tags }: ExperimentCardProps) => {
 
   const [active, setActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
       <Card 
-        className={cn(`relative group hover:bg-neutral-800/50 border-neutral-800 ${active?'pointer-event-none':'cursor-pointer'} `, className)} 
+        className={cn(`relative group hover:bg-neutral-800/50 border-neutral-800 ${active?'pointer-event-none':'cursor-pointer'}  `, className)} 
         onClick={() => setActive(true)}
         onMouseLeave={() => setActive(false)}
       >
+        <figure className={`aspect-video relative ${imageLoaded?'blur-none': 'blur'} transition`}>
+          <Image 
+            fill
+            src='https://gcralvzagqjkaiyeavll.supabase.co/storage/v1/object/public/experiment-thumbnail/opengraph-image.png'
+            alt="alt"
+            className="object-cover object-center"
+            loading="lazy"
+            onLoad={() => setImageLoaded(true)}
+          />
+        </figure>
         <CardHeader className="flex items-center gap-2">
           <i>
             <AlignLeft className=" text-blue-700" size={15}/>
