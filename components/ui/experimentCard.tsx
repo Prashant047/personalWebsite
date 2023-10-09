@@ -112,7 +112,7 @@ function BackDropButton({
       animate={{opacity:1, x:0}}
       whileHover={{scale:1.1}}
     >
-      <a href={href} target="_blank" className="h-12 w-12 flex items-center justify-center bg-neutral-900 rounded-full overflow-hidden">
+      <a href={href} target="_blank" className="h-12 w-12 flex items-center justify-center bg-neutral-900 border border-neutral-700 rounded-full overflow-hidden">
         {icon}
       </a>
       <small className="text-xs font-light">
