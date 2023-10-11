@@ -30,15 +30,17 @@ function HomeExpGrid({experiments}: {experiments: ExperimentDataType[]}) {
         description,
         live_url,
         repository_url,
-        tags
+        tags,
+        thumbnail_url
       }) => (
-        <motion.article key={id} variants={expVariant}>
+        <motion.article key={id} variants={expVariant} className="self-stretch">
           <ExperimentCard
             live_url={live_url}
             repository_url={repository_url}
             title={title}
             description={description}
             tags={tags.split(',')}
+            thumbnail_url={thumbnail_url}
           />
         </motion.article>
       ))}

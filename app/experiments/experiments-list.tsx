@@ -34,12 +34,14 @@ function ExperimentsList({experiments}: {experiments: ExperimentDataType[]}){
         description,
         live_url,
         repository_url,
-        tags
+        tags,
+        thumbnail_url
       }) => (
         <motion.article key={id} variants={expVariant}>
           <ExperimentCard
             live_url={live_url}
             repository_url={repository_url}
+            thumbnail_url={thumbnail_url}
             title={title}
             description={description}
             tags={tags.split(',')}

@@ -8,6 +8,8 @@ import { Suspense } from "react";
 
 import { fetchHomeExperiments } from '@/lib/fetchHomeExperiments';
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const experiments = await fetchHomeExperiments();
 

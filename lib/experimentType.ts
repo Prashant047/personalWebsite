@@ -4,6 +4,7 @@ export interface ExperimentDataType {
   title: string,
   description: string,
   live_url: string,
+  thumbnail_url:string,
   repository_url: string,
   tags: string,
   priority: number

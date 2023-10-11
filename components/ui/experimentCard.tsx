@@ -21,12 +21,13 @@ export interface ExperimentCardProps {
   description: string,
   live_url: string,
   repository_url: string
+  thumbnail_url: string
   tags: Array<string>,
   className?: string
 }
  
  
-const ExperimentCard = ({ className, live_url, repository_url, title, description, tags }: ExperimentCardProps) => {
+const ExperimentCard = ({ className, live_url, repository_url, title, description, tags, thumbnail_url }: ExperimentCardProps) => {
 
   const [active, setActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -40,7 +41,7 @@ const ExperimentCard = ({ className, live_url, repository_url, title, descriptio
         <figure className={`aspect-video relative ${imageLoaded?'blur-none': 'blur'} transition`}>
           <Image 
             fill
-            src='https://gcralvzagqjkaiyeavll.supabase.co/storage/v1/object/public/experiment-thumbnail/opengraph-image.png'
+            src={thumbnail_url}
             alt="alt"
             className="object-cover object-center"
             loading="lazy"

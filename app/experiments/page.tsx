@@ -5,6 +5,8 @@ import { fetchExperiments } from '@/lib/fetchExperiments';
 import { Suspense } from 'react';
 
 
+export const dynamic = 'force-dynamic'
+
 export default async function Experiments(){
 
   const experiments = await fetchExperiments();
