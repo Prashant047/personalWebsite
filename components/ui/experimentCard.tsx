@@ -34,7 +34,7 @@ const ExperimentCard = ({ className, live_url, repository_url, title, descriptio
 
   return (
       <Card 
-        className={cn(`relative group hover:bg-neutral-800/50 border-neutral-800 ${active?'pointer-event-none':'cursor-pointer'}  `, className)} 
+        className={cn(`relative h-full group hover:bg-neutral-800/50 border-neutral-800 ${active?'pointer-event-none':'cursor-pointer'}  `, className)} 
         onClick={() => setActive(true)}
         onMouseLeave={() => setActive(false)}
       >

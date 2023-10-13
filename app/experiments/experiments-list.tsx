@@ -37,7 +37,7 @@ function ExperimentsList({experiments}: {experiments: ExperimentDataType[]}){
         tags,
         thumbnail_url
       }) => (
-        <motion.article key={id} variants={expVariant}>
+        <motion.article key={id} variants={expVariant} className="self-stretch">
           <ExperimentCard
             live_url={live_url}
             repository_url={repository_url}

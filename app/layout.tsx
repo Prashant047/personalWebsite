@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { MainNav } from '@/components/main-nav';
+import { Analytics } from '@vercel/analytics/react';
 import localFont from 'next/font/local'
  
 const publicSans = localFont({
@@ -47,6 +48,7 @@ export default function RootLayout({
           {children}
         </main>
       </body>
+      <Analytics/>
     </html>
   )
 }
