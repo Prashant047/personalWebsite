@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description,
   applicationName: 'Prashant Kumar',
   referrer: 'origin-when-cross-origin',
-  keywords: ['Next.js', 'React', 'JavaScript', 'TypeScript', 'Framermotion', 'Tailwind', 'Full Stack', 'Software Engineer'],
+  keywords: ['Next.js', 'React', 'JavaScript', 'TypeScript', 'Framermotion', 'Tailwind', 'Full Stack', 'Software Engineer', 'Backend', 'Frontend', 'UI'],
   colorScheme: 'dark',
   creator: 'Prashant Kumar',
   publisher: 'Prashant Kumar',
