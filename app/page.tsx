@@ -26,7 +26,8 @@ export default async function Home() {
             className="group inline-flex items-center leading-none gap-1 text-xs text-neutral-500 hover:text-neutral-300 hover:underline" 
             href="/experiments"
           >
-            more experiments <i><ArrowRight className="group-hover:translate-x-1 transition" size={10}/></i>
+            <span>more experiments</span>
+            <i><ArrowRight className="group-hover:translate-x-1 transition" size={10}/></i>
           </Link>
         </div>
       </section>
