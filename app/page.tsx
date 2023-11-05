@@ -6,12 +6,11 @@ import { HomeHeading } from './home-heading';
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { fetchHomeExperiments } from '@/lib/fetchHomeExperiments';
+import { homePageExp } from '@/experimentsData';
 
-export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const experiments = await fetchHomeExperiments();
+  const experiments = homePageExp;
 
   return (
     <>
