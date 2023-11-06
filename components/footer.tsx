@@ -26,7 +26,7 @@ function Footer(){
               `flex h-8 w-8 rounded-full items-center justify-center bg-neutral-700/30 text-neutral-400 
               hover:text-neutral-200 hover:bg-[#1DA1F2] transition
             `}
-            href="https://twitter.com/Prash_Kumar047"
+            href="https://twitter.com/pra5hantInator"
           >
             {<Twitter size={14}/>}
           </a>
